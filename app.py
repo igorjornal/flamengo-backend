@@ -69,6 +69,9 @@ def buscar_cnnbrasil():
             })
     return noticias[:10]
 
+def filtrar_flamengo(noticias):
+    return [n for n in noticias if n and 'flamengo' in n['titulo'].lower()]
+
 @app.route('/')
 def home():
     return "Backend do Flamengo News está funcionando!"
@@ -80,6 +83,7 @@ def pesquisar_noticias():
     noticias += buscar_colunadofla()
     noticias += buscar_lancenet()
     noticias += buscar_cnnbrasil()
+    noticias = filtrar_flamengo(noticias)
     return jsonify({'noticias': noticias})
 
 if __name__ == '__main__':
